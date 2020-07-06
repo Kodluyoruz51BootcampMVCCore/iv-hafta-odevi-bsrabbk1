@@ -19,6 +19,179 @@ AddMvcCore () yönteminin kaynak kodu=
 
 AddMvcCore () işlevi denetleyici yönetimi ve yönlendirme gibi bazı temel işlemleri gerçekleştirir.
 
+### Snapshot Nedir ? Nasıl Çalışır? 
+
+Kısa süreli çalışmaların öncesinde backup almak yerine snapshot kullanırız. Anlık ekran görüntüsü almayı sağlar. Geri almak istediğimiz bir işlem için snapshot'a revert diyerek eski haline dönüş yapabiliriz.
+
+Snapshot'ın kısa süreli işlemler için kullanılması öneriliyor. 24-72 saat arasında snapshot'ın silinmesi gerektiği önerilmekte bu saatten uzun süreli kullanılırsa performans anlamında problemler yaşanabilmektedir.
+
+### Jquery Calender--> [Datapicker](https://jqueryui.com/datepicker/) --> DueAt'i takvim tipinde eklemek nasıl yapılır?
+
+- Solution Explorer> dependencies kısmından sağ tıklayıp Manage Nuget Package e tıklayarak arama kısmından FullCalendar eklentisini bulup seçiyoruz ve install ediyoruz.
+
+- Takvim üzerine verileri çekebilmek için models klasörüne class ekliyoruz.
+
+- ```
+  namespace FullCalendar.Models {
+      public class CalendarEvent {
+          public int id { get; set; }
+          public string title { get; set; }
+          public string start { get; set; }
+          public string end { get; set; }
+          public string color { get; set; }
+          public bool allDay { get; set; }
+      }
+  }
+  ```
+
+- Conrollers klasörüne yeni bir class ekliyoruz.
+
+- ```
+  namespace FullCalendar.Controllers
+  {
+      public class CalendarController : Controller
+      {
+          //
+          // GET: /Calendar/
+  
+          public ActionResult Index()
+          {
+  
+              return View();
+          }
+  
+          public JsonResult GetCalendarEvents() {
+              List<CalendarEvent> eventItems = new List<CalendarEvent>();
+              int i = 0, n = 9;
+              for (i = 0; i < n; i++) {
+                  AddItem(eventItems);
+              }
+  
+              return Json(eventItems, JsonRequestBehavior.AllowGet);
+          }
+  
+          Random random = new Random();
+          public void AddItem(List<CalendarEvent> eventItems) {
+              CalendarEvent item = new CalendarEvent();
+  
+              DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, random.Next(1, 30));
+  
+              item.id = random.Next(1, 100);
+              item.start = startDate.ToString("s");
+              item.end = startDate.AddDays(random.Next(1, 5)).ToString("s");
+              item.allDay = true;
+              item.color = "red";
+              item.title = "Calendar Item " + item.id;
+              eventItems.Add(item);
+          }
+  
+      }
+  }
+  ```
+
+- Burdaki işlem CalenderEvent  nesnesine 10 elemanlı bir liste oluşturmak.
+
+Bu listeyi takvime çekmek için:
+
+- Viewa index sayfamızı oluşturuyoruz,
+
+- ```
+  <!DOCTYPE html>
+  
+  <html>
+  <head>
+      <meta name="viewport" content="width=device-width" />
+      <title>Index</title>
+  
+      <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+  </head>
+  <body>
+      <div id="calendar">
+  
+      </div>
+  
+      <script src="~/Scripts/jquery-2.0.0.min.js"></script>
+      <script src="~/Scripts/moment.min.js"></script>
+      <script src="~/Scripts/moment-with-locales.min.js"></script>
+      <script src="~/Scripts/fullcalendar/fullcalendar.min.js"></script>
+      <script src="~/Scripts/fullcalendar/locale/tr.js"></script>
+      <script src="~/Scripts/fullcalendar/locale-all.js"></script>
+  
+      <script>
+          $(document).ready(function () {
+              GetCalendarEvents();
+          });
+  
+          function GetCalendarEvents() {
+              debugger;
+              $('#calendar').fullCalendar({
+                  lang: 'tr',
+                  header: {
+                      left: 'prev,next today',
+                      center: 'title',
+                      right: 'month,agendaWeek,agendaDay'
+                  },
+                  editable: true,
+                  events: '/Calendar/GetCalendarEvents/',
+                  eventClick: function (event) {
+                      alert('Item ID: ' + event.id  + "\nItem Title: " + event.title);
+                  }
+              });
+          }
+      </script>
+  
+  </body>
+  </html>
+  ```
+
+### Single vs SingleOrDefault
+
+Int tipinde bir dizi var diyelim. Bu dizi içerisinden seçim yapmak istediğimizde seçim şartı sağlanmıyor ise varsayılan değer olan sıfırın döndürülmesini sağlamak için SingleOrDefault kullanmamız gerekir.
+
+Int tipinde bir dizide seçimimizin sonucunda bir eleman geleceği garanti ise Single kullanılır.
+
+### First vs FirstOrDefault
+
+Yine int tipinde bir diziden, seçilecek olan şarta göre o şarttan büyük ilk eleman seçilir.
+
+Single ile aynı mantıktadır bir elemanın geleceği garanti ise kullanılır ancak şartın bir büyüğü seçilir.
+
+[https://medium.com/@ruveydakardelcetin/single-singleordefault-ve-first-firstordefault-fark%C4%B1-d7657eec8d02]: 
+
+### Null Check
+
+- Null dönen ifadeler çok rastlanan hatalardır.
+
+var a; 
+
+Console.Write(a ?? "boş değer");
+
+- Diyerek a değeri null değil ise ekrana a nın değerini yaz.
+
+- A değeri null ise boş değer ifadesini yaz diyoruz.
+
+  ### Partical View
+
+  - Mantık olarak User Control kavramı ile aynıdır.
+
+  - Kendi başına bir işlvei yoktur, bulunduğu sayfa içerisinde çalışır.
+
+  - Yolladığımız modeller üzerinde işlem yaparlar.
+
+  - Patical View ile arayüzü modüler bir hale getiririz.
+
+  - Bir işlemi birden fazla kez yapacaksak kullanıyoruz.
+
+  - Shared klasörüne Add>View  ciyip Create as partial view seçerek partical bir method olarak oluştururuz.
+
+  - Bir liste oluşturduk diyelim bu listeyi istediğim sayfalarda kullanmak istiyorum.Bu listeyi kaydedip Views/Home/Index.cshtml dosyasına @Html.Partial("~/Views/Home/PartialView.cshtml") satırını ekliyorum.
+
+  - Bu sayede bu satırı nereye yapıştırırsam oluşturduğum liste istediğim sayfada eklenmiş oluyor. 
+
+    
+
+
+
  * Shanpshot nedir? nasıl değişir? neden alınır?
 
 *  Jquery Calender--> [Datapicker](https://jqueryui.com/datepicker/) --> DueAt'i takvim tipinde eklemek nasıl yapılır? Araştırınız. (DateTimeUffset tipinden atamalar oluşucak)
