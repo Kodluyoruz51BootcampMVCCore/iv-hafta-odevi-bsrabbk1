@@ -219,7 +219,49 @@ Console.Write(a ?? "boş değer");
   - Azure ile kolay entegre olur.
   - Güncellenebilir ve yönetilebilir.     
 
- 
+ ### Razor Pages vs MVC
+
+- Razor pages ve MVC' nin dosya gruplandırması farklıdır.
+- MVC de işlevsellik önemlidir ve dosyalar işlevine göre sınıflandırılır. 
+- Razor Pages ise dosyaları çözdüğü soruna ve amaca göre sınıflandırır.
+
+- Razor Pages sayfaları MVC kullanan herhangi bir ASP .NET Core uygulamasına otomatik olarak dahil edilir.
+
+- MVC' yi Core Web uygulamasına AddMvc () yöntemi ile dahil  ederiz.
+
+```csharp
+public class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddMvc();
+    }
+```
+
+- Razor Pages,  yapı bakımından ASP .Net Web formlarına benzer. 
+
+- Razor Pages MVC'ye göre daha organize diyebiliriz.
+
+Sayfa Yapısındaki Farklar:
+
+![img](https://1.bp.blogspot.com/-8G1LL9mwx4Q/XaC1-cAhY-I/AAAAAAAACYo/Ac9TmL4T-7EcLZfcwx9BW3rKVnIH2SniwCNcBGAsYHQ/s400/del.png)
+
+- İkiside .cshtml dosya uzantısına sahiptir.
+
+- Razor Pages sayfalarında üst kısımda @page yazar.
+
+- MVC de arka planda kod yoktur. Geliştirici Partical Viewleri bağlamak için Controller dosyasını kullanır.
+
+- Razor Pages, MVC' ye göre anlaşılması  kolaydır. Arka planda kod içerir.
+
+  
 
 
  * Shanpshot nedir? nasıl değişir? neden alınır?
