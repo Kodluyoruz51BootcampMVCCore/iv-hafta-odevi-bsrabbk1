@@ -253,13 +253,13 @@ Sayfa Yapısındaki Farklar:
 
 ![img](https://1.bp.blogspot.com/-8G1LL9mwx4Q/XaC1-cAhY-I/AAAAAAAACYo/Ac9TmL4T-7EcLZfcwx9BW3rKVnIH2SniwCNcBGAsYHQ/s400/del.png)
 
-- İkiside .cshtml dosya uzantısına sahiptir.
+ İkiside .cshtml dosya uzantısına sahiptir.
 
-- Razor Pages sayfalarında üst kısımda @page yazar.
+ Razor Pages sayfalarında üst kısımda @page yazar.
 
-- MVC de arka planda kod yoktur. Geliştirici Partical Viewleri bağlamak için Controller dosyasını kullanır.
+ MVC de arka planda kod yoktur. Geliştirici Partical Viewleri bağlamak için Controller dosyasını kullanır.
 
-- Razor Pages, MVC' ye göre anlaşılması  kolaydır. Arka planda kod içerir.
+ Razor Pages, MVC' ye göre anlaşılması  kolaydır. Arka planda kod içerir.
 
   
 
