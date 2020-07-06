@@ -189,7 +189,37 @@ Console.Write(a ?? "boş değer");
   - Bu sayede bu satırı nereye yapıştırırsam oluşturduğum liste istediğim sayfada eklenmiş oluyor. 
 
     
+### Authentication
 
+- Veri güvenliği tabiridir. Herhangi bir internet kullanıcısının , uygulamanın veya programın sisteme erişirken kim olduğunu kanıtlama işlemidir.
+
+- Kimlik doğrulama kavramı ile aynı şeydir.
+
+- Kullanıcının girdiği kimlik bilgileri giriş yapmak istediği sistemdeki veri tabanında bulunan bilgilerle karşılaştırılır bilgiler eşleştiğinde giriş izni verilir.
+
+  #### Temel Kimlik Doğrulaması
+
+  - HTTP temel kimlik doğrulaması sunucunun istemciden kimlik bilgilerini istediği basit bir doğrulama şeklidir.
+
+  #### Form Kimlik Doğrulaması
+
+  - Doğrulama işlemi için tarayıcıda bulanan çerezleri kullanır.
+  - Çerez bilgisi yok ise kullanıcı sisteme girmek zorundadır.
+  - Giriş yapmış bir kullanıcının çerezlerin geçerlilik süresi dolduğunda kullanıcı tekrar giriş sayfasına döner.
+
+  #### OAuth 2 
+
+  - Web uygulamalarının Facebook, GtiHub gibi hizmetlerdeki kullanıcı hesaplarına sınırlı olarak erişim elde etmeyi sağlar.
+  -   Kullanıcının, kimlik doğrulamasını kullanıcı hesabını  barındıran hizmete devredip üçüncü taraf uygulamalarının hesabına erişmesini izin vermesi ile çalışır.
+
+  #### Identity Framework
+
+  - Genişletilebilir ve özelleştirilebilir bir yapıya sahiptir.
+  - Facebook, Google servisleri, Twitter üzerinden üyelik gerçekleştirmeyi sağlar.
+  - Azure ile kolay entegre olur.
+  - Güncellenebilir ve yönetilebilir.     
+
+ 
 
 
  * Shanpshot nedir? nasıl değişir? neden alınır?
